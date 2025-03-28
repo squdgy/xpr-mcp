@@ -17,15 +17,12 @@ amount
 
 token
 
-privateKey
 ### sell (does not really do anything in this demo)
 account
 
 amount
 
 token
-
-privateKey
 
 ## Getting Started
 Build: `npm run build`

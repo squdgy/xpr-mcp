@@ -3,7 +3,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { AccountTokensResponse, TokensResponse } from "./interfaces.js";
 
-const BLOKS_API_BASE = "https://www.api.bloks.io/proton-test";
+const BLOKS_API_BASE = "https://www.api.bloks.io/proton";
 const USER_AGENT = "xprnetwork-mcp/1.0";
 
 // Create server instance
@@ -82,7 +82,7 @@ server.tool(
     chain: z.string().describe("The chain to get the supported tokens for. Examples would be proton, wax, xpr network")
   },
   async ({ chain }) => {
-    const tokensUrl = `${BLOKS_API_BASE}/tokens?chain=proton-test`;
+    const tokensUrl = `${BLOKS_API_BASE}/tokens?chain=proton`;
     console.log(tokensUrl);
     const tokensData = await makeBloksRequest<TokensResponse[]>(tokensUrl);
     if (!tokensData) {
@@ -116,10 +116,9 @@ server.tool(
   {
     account: z.string().describe("Alphanumeric name describing an account on the xpr network (e.g. protonnz, metalpayouts, guild.nefty)"),
     amount: z.number().describe("The amount of tokens to buy"),
-    token: z.string().describe("The xtoken symbol (e.g. BTC, XBTC, USDC, XUSDC)"),
-    privateKey: z.string().describe("The private key of the account")
+    token: z.string().describe("The xtoken symbol (e.g. BTC, XBTC, USDC, XUSDC)")
   },
-  async ({ account, amount, token, privateKey }) => {
+  async ({ account, amount, token }) => {
       return {
         content: [
           {
@@ -137,10 +136,9 @@ server.tool(
   {
     account: z.string().describe("Alphanumeric name describing an account on the xpr network (e.g. protonnz, metalpayouts, guild.nefty)"),
     amount: z.number().describe("The amount of tokens to sell"),
-    token: z.string().describe("The xtoken symbol (e.g. BTC, XBTC, USDC, XUSDC)"),
-    privateKey: z.string().describe("The private key of the account")
+    token: z.string().describe("The xtoken symbol (e.g. BTC, XBTC, USDC, XUSDC)")
   },
-  async ({ account, amount, token, privateKey }) => {
+  async ({ account, amount, token }) => {
       return {
         content: [
           {
